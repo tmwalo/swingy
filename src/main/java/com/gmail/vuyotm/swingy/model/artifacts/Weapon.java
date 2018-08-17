@@ -10,10 +10,8 @@ import javax.validation.constraints.Min;
 
 public class Weapon extends Artifact {
 
-    @NotEmpty
     @Min(0)
     private int     physicalAttackBonus;
-    @NotEmpty
     @Min(0)
     private int     shinsooAttackBonus;
 

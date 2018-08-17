@@ -2,7 +2,6 @@ package com.gmail.vuyotm.swingy.model.characters;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -12,35 +11,32 @@ import javax.validation.constraints.Min;
 
 public abstract class Character {
 
-    @NotEmpty
-    @Min(0)
+    @Min(1)
     private int     level;
-    @NotEmpty
     @Min(0)
     private int     physicalAttack;
-    @NotEmpty
     @Min(0)
     private int     physicalDefense;
-    @NotEmpty
     @Min(0)
     private int     shinsooAttack;
-    @NotEmpty
     @Min(0)
     private int     shinsooDefense;
-    @NotEmpty
     @Min(0)
     private int     speed;
-    @NotEmpty
     @Min(0)
     @Max(100)
     private int     evasion;
-    @NotEmpty
     @Min(0)
     @Max(100)
     private int     criticalHit;
-    @NotEmpty
     @Min(0)
     private int     hitPts;
+    @Min(0)
+    private int     x;
+    @Min(0)
+    private int     y;
+    public static final int     EVASION_CAP = 100;
+    public static final int     CRIT_HIT_CAP = 100;
 
     public Character(int level, int physicalAttack, int physicalDefense, int shinsooAttack, int shinsooDefense, int speed, int evasion, int criticalHit, int hitPts) {
         this.level = level;

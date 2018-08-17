@@ -4,10 +4,14 @@ import com.gmail.vuyotm.swingy.model.artifacts.Armor;
 import com.gmail.vuyotm.swingy.model.artifacts.Helm;
 import com.gmail.vuyotm.swingy.model.artifacts.Weapon;
 
-public class WaveController extends PlayerRegular {
+public class WaveController extends Regular {
 
-    public WaveController(int level, int physicalAttack, int physicalDefense, int shinsooAttack, int shinsooDefense, int speed, int evasion, int criticalHit, int hitPts, String name, String classType, Helm helm, Armor armor, Weapon weapon, int experience) {
-        super(level, physicalAttack, physicalDefense, shinsooAttack, shinsooDefense, speed, evasion, criticalHit, hitPts, name, classType, helm, armor, weapon, experience);
+    public WaveController(String name) {
+        this(1, 2, 5, 10, 10, 4, 2, 2, 15, name, Regular.WAVE_CONTROLLER, 0, null, null, null);
+    }
+
+    public WaveController(int level, int physicalAttack, int physicalDefense, int shinsooAttack, int shinsooDefense, int speed, int evasion, int criticalHit, int hitPts, String name, String classType, int experience, Helm helm, Armor armor, Weapon weapon) {
+        super(level, physicalAttack, physicalDefense, shinsooAttack, shinsooDefense, speed, evasion, criticalHit, hitPts, name, classType, experience, helm, armor, weapon);
     }
 
 }

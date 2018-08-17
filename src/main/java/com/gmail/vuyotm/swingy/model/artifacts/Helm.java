@@ -10,7 +10,6 @@ import javax.validation.constraints.Min;
 
 public class Helm extends Artifact {
 
-    @NotEmpty
     @Min(0)
     private int     hitPtsBonus;
 
