@@ -1,5 +1,6 @@
 package com.gmail.vuyotm.swingy.model.characters;
 
+import com.gmail.vuyotm.swingy.model.artifacts.Artifact;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -12,6 +13,7 @@ public abstract class Shinheuh extends Character {
     @NotEmpty
     private String                  type;
     private int                     expGiven;
+    private Artifact                itemDrop;
     public static final String      NET_DOLPHIN = "net dolphin";
     public static final String      STRIPED_GROUND_PIG = "striped ground pig";
     public static final String      WHITE_STEEL_EEL = "white steel eel";

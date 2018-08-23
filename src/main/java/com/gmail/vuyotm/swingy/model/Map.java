@@ -3,12 +3,15 @@ package com.gmail.vuyotm.swingy.model;
 import com.gmail.vuyotm.swingy.model.characters.Regular;
 import com.gmail.vuyotm.swingy.model.characters.Shinheuh;
 import com.gmail.vuyotm.swingy.util.ShinheuhFactory;
+import lombok.Getter;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+@Getter
 
 public class Map {
 

@@ -50,4 +50,11 @@ public abstract class Character {
         this.hitPts = hitPts;
     }
 
+    public boolean hasDied() {
+        if (hitPts == 0)
+            return (true);
+        else
+            return (false);
+    }
+
 }

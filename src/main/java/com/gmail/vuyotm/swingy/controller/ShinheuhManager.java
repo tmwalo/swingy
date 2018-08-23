@@ -73,7 +73,7 @@ public class ShinheuhManager {
         max = 100;
         randNum = ThreadLocalRandom.current().nextInt(min, max + 1);
         shinheuhType = shinheuh.getType();
-        if (shinheuhType.equals(Shinheuh.NET_DOLPHIN) && ((randNum >= 1) && (randNum <= 10))) {
+        if (shinheuhType.equals(Shinheuh.NET_DOLPHIN) && ((randNum >= 1) && (randNum <= 15))) {
             return (true);
         }
         else if (shinheuhType.equals(Shinheuh.STRIPED_GROUND_PIG) && ((randNum >= 1) && (randNum <= 10))) {
