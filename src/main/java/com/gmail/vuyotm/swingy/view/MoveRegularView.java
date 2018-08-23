@@ -38,10 +38,6 @@ public class MoveRegularView extends BaseConsoleView {
         writeToScreen(System.lineSeparator() + "You have entered a new area." + System.lineSeparator());
     }
 
-    public void pickupArtifact() {
-
-    }
-
     public void displayMoveRegular(BufferedReader bufferedReader) throws IOException {
         boolean selectMove;
 
@@ -57,6 +53,8 @@ public class MoveRegularView extends BaseConsoleView {
             else if (getMoveOption().equals("3"))
                 selectMove = true;
             else if (getMoveOption().equals("4"))
+                selectMove = true;
+            else if (getMoveOption().equals("s"))
                 selectMove = true;
             else if (getMoveOption().equals("q"))
                 System.exit(0);

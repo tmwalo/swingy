@@ -7,10 +7,7 @@ import com.gmail.vuyotm.swingy.model.artifacts.Weapon;
 import com.gmail.vuyotm.swingy.model.characters.Regular;
 import com.gmail.vuyotm.swingy.model.characters.Shinheuh;
 import com.gmail.vuyotm.swingy.util.RegularFactory;
-import com.gmail.vuyotm.swingy.view.CreateNewRegularView;
-import com.gmail.vuyotm.swingy.view.FightView;
-import com.gmail.vuyotm.swingy.view.MoveRegularView;
-import com.gmail.vuyotm.swingy.view.StartGameView;
+import com.gmail.vuyotm.swingy.view.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,17 +42,19 @@ public class GameController {
     }
 
     public void moveRegular(Regular regular, Map map, BufferedReader bufferedReader) throws IOException {
-        MoveRegularView     moveRegularView;
-        RegularManager      regularManager;
-        MapManager          mapManager;
-        int                 originalX;
-        int                 originalY;
-        Shinheuh            encounteredShinheuh;
-        ShinheuhManager     shinheuhManager;
+        MoveRegularView         moveRegularView;
+        RegularManager          regularManager;
+        MapManager              mapManager;
+        int                     originalX;
+        int                     originalY;
+        Shinheuh                encounteredShinheuh;
+        ShinheuhManager         shinheuhManager;
+        StatsAndArtifactsView   statsAndArtifactsView;
 
         moveRegularView = new MoveRegularView();
         regularManager = new RegularManager(regular);
         mapManager = new MapManager(map);
+        statsAndArtifactsView = new StatsAndArtifactsView();
         while (true) {
             originalX = regular.getX();
             originalY = regular.getY();
@@ -68,6 +67,10 @@ public class GameController {
                 regularManager.moveEast();
             else if (moveRegularView.getMoveOption().equals("4"))
                 regularManager.moveWest();
+            else if (moveRegularView.getMoveOption().equals("s")) {
+                statsAndArtifactsView.displayStatsAndEquipment(regular);
+                continue ;
+            }
             if (mapManager.hasCrossedMapBorder(regular)) {
                 map = new Map(regular);
                 mapManager = new MapManager(map);
