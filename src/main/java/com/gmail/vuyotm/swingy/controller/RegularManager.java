@@ -1,6 +1,5 @@
 package com.gmail.vuyotm.swingy.controller;
 
-import com.gmail.vuyotm.swingy.model.characters.Character;
 import com.gmail.vuyotm.swingy.model.characters.Regular;
 import com.gmail.vuyotm.swingy.model.characters.Shinheuh;
 
@@ -90,17 +89,13 @@ public class RegularManager {
 
     public void levelUp() {
         while (hasLeveledUp()) {
-            regular.setLevel(regular.getLevel() + 1);
+            regular.setLevel(regular.getLevel() + 2);
             regular.setHitPts(regular.getHitPts() + 15);
-            regular.setPhysicalAttack(regular.getPhysicalAttack() + 1);
-            regular.setPhysicalDefense(regular.getPhysicalDefense() + 1);
-            regular.setShinsooAttack(regular.getShinsooAttack() + 1);
-            regular.setShinsooDefense(regular.getShinsooDefense() + 1);
-            regular.setSpeed(regular.getSpeed() + 1);
-            if (regular.getEvasion() < Character.EVASION_CAP)
-                regular.setEvasion(regular.getEvasion() + 1);
-            if (regular.getCriticalHit() < Character.CRIT_HIT_CAP)
-                regular.setCriticalHit(regular.getCriticalHit() + 1);
+            regular.setPhysicalAttack(regular.getPhysicalAttack() + 2);
+            regular.setPhysicalDefense(regular.getPhysicalDefense() + 2);
+            regular.setShinsooAttack(regular.getShinsooAttack() + 2);
+            regular.setShinsooDefense(regular.getShinsooDefense() + 2);
+            regular.setSpeed(regular.getSpeed() + 2);
         }
     }
 

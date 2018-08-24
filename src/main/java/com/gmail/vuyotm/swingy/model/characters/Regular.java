@@ -29,8 +29,8 @@ public abstract class Regular extends Character {
     public static final String  SPEAR_BEARER = "spear bearer";
     public static final String  WAVE_CONTROLLER = "wave controller";
 
-    public Regular(int level, int physicalAttack, int physicalDefense, int shinsooAttack, int shinsooDefense, int speed, int evasion, int criticalHit, int hitPts, String name, String classType, int experience, Helm helm, Armor armor, Weapon weapon) {
-        super(level, physicalAttack, physicalDefense, shinsooAttack, shinsooDefense, speed, evasion, criticalHit, hitPts);
+    public Regular(int level, int physicalAttack, int physicalDefense, int shinsooAttack, int shinsooDefense, int speed, int hitPts, String name, String classType, int experience, Helm helm, Armor armor, Weapon weapon) {
+        super(level, physicalAttack, physicalDefense, shinsooAttack, shinsooDefense, speed, hitPts);
         this.name = name;
         this.classType = classType;
         this.experience = experience;
