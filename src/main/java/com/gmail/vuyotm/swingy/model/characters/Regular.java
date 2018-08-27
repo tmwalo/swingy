@@ -14,6 +14,8 @@ import javax.validation.constraints.Min;
 
 public abstract class Regular extends Character {
 
+    @Min(0)
+    private int                 id;
     @NotEmpty
     private String              name;
     @NotEmpty

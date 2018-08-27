@@ -15,7 +15,7 @@ public class Database {
         try (Connection conn = DriverManager.getConnection(CONNECTION_STRING);
              Statement stmt = conn.createStatement()) {
             stmt.execute("CREATE TABLE IF NOT EXISTS regulars " +
-                                "(regular_level INTEGER NOT NULL, physical_attack INTEGER NOT NULL, physical_defense INTEGER NOT NULL," +
+                                "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, regular_level INTEGER NOT NULL, physical_attack INTEGER NOT NULL, physical_defense INTEGER NOT NULL," +
                                 "shinsoo_attack INTEGER NOT NULL, shinsoo_defense INTEGER NOT NULL, speed INTEGER NOT NULL, hit_pts INTEGER NOT NULL," +
                                 "regular_name TEXT NOT NULL, class_type TEXT NOT NULL, experience INTEGER NOT NULL," +
                                 "helm TEXT DEFAULT(NULL), helm_level INTEGER DEFAULT(0), armor TEXT DEFAULT(NULL), armor_level INTEGER DEFAULT(0)," +
@@ -25,6 +25,16 @@ public class Database {
             System.out.println("Error: " + e.getMessage());
         }
 
+    }
+
+    public static void dropTable() {
+        try (Connection conn = DriverManager.getConnection(CONNECTION_STRING);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute("DROP TABLE regulars");
+        }
+        catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
 }

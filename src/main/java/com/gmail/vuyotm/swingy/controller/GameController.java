@@ -1,18 +1,23 @@
 package com.gmail.vuyotm.swingy.controller;
 
 import com.gmail.vuyotm.swingy.model.Map;
+import com.gmail.vuyotm.swingy.model.RegularContext;
 import com.gmail.vuyotm.swingy.model.artifacts.Armor;
 import com.gmail.vuyotm.swingy.model.artifacts.Helm;
 import com.gmail.vuyotm.swingy.model.artifacts.Weapon;
 import com.gmail.vuyotm.swingy.model.characters.Regular;
 import com.gmail.vuyotm.swingy.model.characters.Shinheuh;
+import com.gmail.vuyotm.swingy.storage.Database;
 import com.gmail.vuyotm.swingy.util.RegularFactory;
 import com.gmail.vuyotm.swingy.view.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameController {
+
+    private boolean isNewRegular;
 
     public void startGame(BufferedReader bufferedReader) throws IOException {
         StartGameView   startGameView;
@@ -20,13 +25,34 @@ public class GameController {
         startGameView = new StartGameView();
         startGameView.displayStartScreen(bufferedReader);
         if (startGameView.getInputData().equals(StartGameView.LOAD_REGULAR))
-            loadRegular();
+            loadRegular(bufferedReader);
         else if (startGameView.getInputData().equals(StartGameView.CREATE_NEW_REGULAR))
             createRegular(bufferedReader);
     }
 
-    public void loadRegular() {
+    public void loadRegular(BufferedReader bufferedReader) throws IOException {
+        ArrayList<Regular>  regulars;
+        RegularContext      regularContext;
+        LoadRegularView     loadRegularView;
+        Regular             regular;
+        Map                 map;
 
+        regularContext = new RegularContext(Database.CONNECTION_STRING);
+        regularContext.openConnection();
+        regulars = regularContext.getAllRegulars();
+        regularContext.close();
+        loadRegularView = new LoadRegularView();
+        loadRegularView.displayRegulars(regulars, bufferedReader);
+        if (regulars.isEmpty())
+            startGame(bufferedReader);
+        else {
+            regularContext.openConnection();
+            regular = regularContext.getRegular(loadRegularView.getSelectedRegularID());
+            regularContext.close();
+            map = new Map(regular);
+            isNewRegular = false;
+            moveRegular(regular, map, bufferedReader);
+        }
     }
 
     public void createRegular(BufferedReader bufferedReader) throws IOException {
@@ -38,6 +64,7 @@ public class GameController {
         createNewRegularView.displayRegularCreation(bufferedReader);
         regular = RegularFactory.newRegular(createNewRegularView.getRegularName(), createNewRegularView.getRegularPosition());
         map = new Map(regular);
+        isNewRegular = true;
         moveRegular(regular, map, bufferedReader);
     }
 
@@ -50,15 +77,26 @@ public class GameController {
         Shinheuh                encounteredShinheuh;
         ShinheuhManager         shinheuhManager;
         StatsAndArtifactsView   statsAndArtifactsView;
+        RegularContext          regularContext;
 
         moveRegularView = new MoveRegularView();
         regularManager = new RegularManager(regular);
         mapManager = new MapManager(map);
         statsAndArtifactsView = new StatsAndArtifactsView();
+        regularContext = new RegularContext(Database.CONNECTION_STRING);
         while (true) {
             originalX = regular.getX();
             originalY = regular.getY();
             moveRegularView.displayMoveRegular(bufferedReader);
+            if (moveRegularView.isHasExited()) {
+                regularContext.openConnection();
+                if (isNewRegular)
+                    regularContext.postRegular(regular);
+                else
+                    regularContext.putRegular(regular);
+                regularContext.close();
+                System.exit(0);
+            }
             if (moveRegularView.getMoveOption().equals("1"))
                 regularManager.moveNorth();
             else if (moveRegularView.getMoveOption().equals("2"))

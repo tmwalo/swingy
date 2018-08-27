@@ -13,6 +13,7 @@ public class MoveRegularView extends BaseConsoleView {
 
     private String              moveOption;
     private String              encounterOption;
+    private boolean             hasExited = false;
     public static final String  DIRECTIONS = "Press 1 to go North." + System.lineSeparator()
                                             + "Press 2 to go South." + System.lineSeparator()
                                             + "Press 3 to go East." + System.lineSeparator()
@@ -56,8 +57,10 @@ public class MoveRegularView extends BaseConsoleView {
                 selectMove = true;
             else if (getMoveOption().equals("s"))
                 selectMove = true;
-            else if (getMoveOption().equals("q"))
-                System.exit(0);
+            else if (getMoveOption().equals("q")) {
+                hasExited = true;
+                break ;
+            }
             else
                 writeToScreen(System.lineSeparator() + "Invalid input." + System.lineSeparator());
         }

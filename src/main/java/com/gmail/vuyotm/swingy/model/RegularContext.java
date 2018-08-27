@@ -51,7 +51,8 @@ public class RegularContext {
             while (resultSet.next()) {
                 Regular regular;
 
-                regular = RegularFactory.newRegular("placeholder", "placeholder");
+                regular = RegularFactory.newRegular("placeholder", "scout");
+                regular.setId(resultSet.getInt("id"));
                 regular.setLevel(resultSet.getInt("regular_level"));
                 regular.setPhysicalAttack(resultSet.getInt("physical_attack"));
                 regular.setPhysicalDefense(resultSet.getInt("physical_defense"));
@@ -87,7 +88,7 @@ public class RegularContext {
             }
         }
         catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("SQL get regulars error: " + e.getMessage());
         }
         return (list);
     }
@@ -105,7 +106,8 @@ public class RegularContext {
             prepStmt.setInt(1, id);
             resultSet = prepStmt.executeQuery();
             if (resultSet.next()) {
-                regular = RegularFactory.newRegular("placeholder", "placeholder");
+                regular = RegularFactory.newRegular("placeholder", "scout");
+                regular.setId(resultSet.getInt("id"));
                 regular.setLevel(resultSet.getInt("regular_level"));
                 regular.setPhysicalAttack(resultSet.getInt("physical_attack"));
                 regular.setPhysicalDefense(resultSet.getInt("physical_defense"));
@@ -140,7 +142,7 @@ public class RegularContext {
             }
         }
         catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("SQL get regular error: " + e.getMessage());
         }
         return (regular);
     }
@@ -150,42 +152,40 @@ public class RegularContext {
 
         if (regular == null)
             throw new IllegalArgumentException("Regular may not be null.");
-        sql = "INSERT INTO regulars VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql = "INSERT INTO regulars VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement prepStmt = conn.prepareStatement(sql)) {
-            prepStmt.setInt(1, regular.getLevel());
-            prepStmt.setInt(2, regular.getPhysicalAttack());
-            prepStmt.setInt(3, regular.getPhysicalDefense());
-            prepStmt.setInt(4, regular.getShinsooAttack());
-            prepStmt.setInt(5, regular.getShinsooDefense());
-            prepStmt.setInt(6, regular.getSpeed());
-            prepStmt.setInt(7, regular.getHitPts());
-            prepStmt.setString(8, regular.getName());
-            prepStmt.setString(9, regular.getClassType());
-            prepStmt.setInt(10, regular.getExperience());
+            prepStmt.setInt(2, regular.getLevel());
+            prepStmt.setInt(3, regular.getPhysicalAttack());
+            prepStmt.setInt(4, regular.getPhysicalDefense());
+            prepStmt.setInt(5, regular.getShinsooAttack());
+            prepStmt.setInt(6, regular.getShinsooDefense());
+            prepStmt.setInt(7, regular.getSpeed());
+            prepStmt.setInt(8, regular.getHitPts());
+            prepStmt.setString(9, regular.getName());
+            prepStmt.setString(10, regular.getClassType());
+            prepStmt.setInt(11, regular.getExperience());
             if (regular.getHelm() != null) {
-                prepStmt.setString(11, regular.getHelm().getType());
-                prepStmt.setInt(12, regular.getHelm().getLevel());
+                prepStmt.setString(12, regular.getHelm().getType());
+                prepStmt.setInt(13, regular.getHelm().getLevel());
             }
             if (regular.getArmor() != null) {
-                prepStmt.setString(13, regular.getArmor().getType());
-                prepStmt.setInt(14, regular.getArmor().getLevel());
+                prepStmt.setString(14, regular.getArmor().getType());
+                prepStmt.setInt(15, regular.getArmor().getLevel());
             }
             if (regular.getWeapon() != null) {
-                prepStmt.setString(15, regular.getWeapon().getType());
-                prepStmt.setInt(16, regular.getWeapon().getLevel());
+                prepStmt.setString(16, regular.getWeapon().getType());
+                prepStmt.setInt(17, regular.getWeapon().getLevel());
             }
-            prepStmt.executeQuery();
+            prepStmt.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("SQL post regular error: " + e.getMessage());
         }
     }
 
-    public void putRegular(int id, Regular regular) {
+    public void putRegular(Regular regular) {
         String  sql;
 
-        if (id <= 0)
-            throw new IllegalArgumentException("Regular id must be positive.");
         if (regular == null)
             throw new IllegalArgumentException("Regular may not be null.");
         sql = "UPDATE regulars SET " +
@@ -204,7 +204,7 @@ public class RegularContext {
                 "armor = ?, " +
                 "armor_level = ?, " +
                 "weapon = ?, " +
-                "weapon_level = ?, " +
+                "weapon_level = ? " +
                 "WHERE id = ?";
         try (PreparedStatement prepStmt = conn.prepareStatement(sql)) {
             prepStmt.setInt(1, regular.getLevel());
@@ -229,11 +229,11 @@ public class RegularContext {
                 prepStmt.setString(15, regular.getWeapon().getType());
                 prepStmt.setInt(16, regular.getWeapon().getLevel());
             }
-            prepStmt.setInt(17, id);
-            prepStmt.executeQuery();
+            prepStmt.setInt(17, regular.getId());
+            prepStmt.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("SQL put regular error: " + e.getMessage());
         }
     }
 
@@ -245,10 +245,10 @@ public class RegularContext {
         sql = "DELETE FROM regulars WHERE id = ?";
         try (PreparedStatement prepStmt = conn.prepareStatement(sql)) {
             prepStmt.setInt(1, id);
-            prepStmt.executeQuery();
+            prepStmt.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("SQL delete regular error: " + e.getMessage());
         }
     }
 
