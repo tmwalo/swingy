@@ -2,6 +2,8 @@ package com.gmail.vuyotm.swingy;
 
 import com.gmail.vuyotm.swingy.controller.GameController;
 import com.gmail.vuyotm.swingy.storage.Database;
+import com.gmail.vuyotm.swingy.view.CreateNewRegularGuiView;
+import com.gmail.vuyotm.swingy.view.StartGameGuiView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +15,7 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String[] args) {
-
+/*
         GameController  gameController;
 
         Database.createDB();
@@ -25,7 +27,7 @@ public class Main {
             e.printStackTrace();
         }
 
-/*
+
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:swingy.db");
         }
@@ -33,6 +35,11 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
 */
+
+        CreateNewRegularGuiView     createNewRegularGuiView;
+
+        createNewRegularGuiView = new CreateNewRegularGuiView();
+
     }
 
 }
