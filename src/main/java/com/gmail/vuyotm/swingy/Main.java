@@ -2,8 +2,7 @@ package com.gmail.vuyotm.swingy;
 
 import com.gmail.vuyotm.swingy.controller.GameController;
 import com.gmail.vuyotm.swingy.storage.Database;
-import com.gmail.vuyotm.swingy.view.CreateNewRegularGuiView;
-import com.gmail.vuyotm.swingy.view.StartGameGuiView;
+import com.gmail.vuyotm.swingy.view.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,11 +33,27 @@ public class Main {
         catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-*/
+
 
         CreateNewRegularGuiView     createNewRegularGuiView;
 
         createNewRegularGuiView = new CreateNewRegularGuiView();
+
+
+        MoveRegularGuiView  moveRegularGuiView;
+
+        moveRegularGuiView = new MoveRegularGuiView();
+
+
+        FightGuiView    fightGuiView;
+
+        fightGuiView = new FightGuiView();
+
+*/
+
+        StatsAndArtifactsGuiView    statsAndArtifactsGuiView;
+
+        statsAndArtifactsGuiView = new StatsAndArtifactsGuiView();
 
     }
 
