@@ -1,7 +1,12 @@
 package com.gmail.vuyotm.swingy.view;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+
+@Getter
 
 public class StartGameGuiView extends JFrame {
 
@@ -36,6 +41,14 @@ public class StartGameGuiView extends JFrame {
         setLayout(null);
         setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void addListenerCreateRegularBtn(ActionListener actionListener) {
+        createRegularBtn.addActionListener(actionListener);
+    }
+
+    public void addListenerLoadRegularBtn(ActionListener actionListener) {
+        loadRegularBtn.addActionListener(actionListener);
     }
 
 }

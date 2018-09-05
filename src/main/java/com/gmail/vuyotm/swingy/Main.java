@@ -1,6 +1,7 @@
 package com.gmail.vuyotm.swingy;
 
 import com.gmail.vuyotm.swingy.controller.GameController;
+import com.gmail.vuyotm.swingy.controller.GameGuiController;
 import com.gmail.vuyotm.swingy.storage.Database;
 import com.gmail.vuyotm.swingy.view.*;
 
@@ -34,6 +35,21 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         }
 
+*/
+
+        Database.createDB();
+        GameGuiController   gameGuiController;
+
+        gameGuiController = new GameGuiController();
+        gameGuiController.startGame();
+
+/*
+
+        StartGameGuiView    startGameGuiView;
+
+        startGameGuiView = new StartGameGuiView();
+
+
 
         CreateNewRegularGuiView     createNewRegularGuiView;
 
@@ -49,11 +65,12 @@ public class Main {
 
         fightGuiView = new FightGuiView();
 
-*/
 
         StatsAndArtifactsGuiView    statsAndArtifactsGuiView;
 
         statsAndArtifactsGuiView = new StatsAndArtifactsGuiView();
+
+*/
 
     }
 

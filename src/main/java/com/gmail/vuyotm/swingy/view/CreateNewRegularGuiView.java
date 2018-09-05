@@ -1,7 +1,11 @@
 package com.gmail.vuyotm.swingy.view;
 
+import com.gmail.vuyotm.swingy.model.characters.Regular;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CreateNewRegularGuiView extends JFrame {
 
@@ -21,6 +25,7 @@ public class CreateNewRegularGuiView extends JFrame {
     private JTextArea               spearBearerTxtArea;
     private JTextArea               waveControllerTxtArea;
     private JButton                 createRegularBtn;
+    private ArrayList<JRadioButton> regularPositionRBtns;
     private static final String     SCOUT_DESCR = "Scouts will usually run ahead and investigate enemy forces for info," +
                                                     " then return and deliver the information to the Light Bearers. They also help the Fishermen with offence.";
     private static final String     LIGHT_BEARER_DESCR = "Light Bearers store and deliver knowledge to their team-mates while guiding them with the light of their Lighthouse.";
@@ -48,11 +53,18 @@ public class CreateNewRegularGuiView extends JFrame {
         fishermanTxtArea = new JTextArea(FISHERMAN_DESCR);
         spearBearerTxtArea = new JTextArea(SPEAR_BEARER_DESCR);
         waveControllerTxtArea = new JTextArea(WAVE_CONTROLLER_DESCR);
+        scoutRbtn.setSelected(true);
         scoutTxtArea.setEditable(false);
         lightBearerTxtArea.setEditable(false);
         fishermanTxtArea.setEditable(false);
         spearBearerTxtArea.setEditable(false);
         waveControllerTxtArea.setEditable(false);
+        regularPositionRBtns = new ArrayList<>();
+        regularPositionRBtns.add(scoutRbtn);
+        regularPositionRBtns.add(lightBearerRbtn);
+        regularPositionRBtns.add(fishermanRbtn);
+        regularPositionRBtns.add(spearBearerRbtn);
+        regularPositionRBtns.add(waveControllerRbtn);
         buttonGroup = new ButtonGroup();
         buttonGroup.add(scoutRbtn);
         buttonGroup.add(lightBearerRbtn);
@@ -99,6 +111,33 @@ public class CreateNewRegularGuiView extends JFrame {
         setLayout(null);
         setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void addListenerCreateRegularBtn(ActionListener actionListener) {
+        createRegularBtn.addActionListener(actionListener);
+    }
+
+    public String getRegularName() {
+        return (regularNameTxtFld.getText());
+    }
+
+    public String getRegularPosition() {
+        if (scoutRbtn.isSelected())
+            return (Regular.SCOUT);
+        else if (lightBearerRbtn.isSelected())
+            return (Regular.LIGHT_BEARER);
+        else if (fishermanRbtn.isSelected())
+            return (Regular.FISHERMAN);
+        else if (spearBearerRbtn.isSelected())
+            return (Regular.SPEAR_BEARER);
+        else if (waveControllerRbtn.isSelected())
+            return (Regular.WAVE_CONTROLLER);
+        else
+            return ("");
+    }
+
+    public void displayErrorMsg(String errorMsg) {
+        JOptionPane.showMessageDialog(this, errorMsg);
     }
 
 }

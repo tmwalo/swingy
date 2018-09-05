@@ -1,7 +1,11 @@
 package com.gmail.vuyotm.swingy.view;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
+
+@Getter
 
 public class MoveRegularGuiView extends JFrame {
 
@@ -42,6 +46,10 @@ public class MoveRegularGuiView extends JFrame {
         setSize(500, 600);
         setLayout(null);
         setVisible(true);
+    }
+
+    public void setFeedbackTxt(String feedback) {
+        feedbackTxtFld.setText(feedback);
     }
 
 }

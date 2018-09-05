@@ -4,6 +4,7 @@ import com.gmail.vuyotm.swingy.model.characters.Regular;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class LoadRegularGuiView extends JFrame {
@@ -15,7 +16,7 @@ public class LoadRegularGuiView extends JFrame {
         heading = new JLabel("Load Regular");
         heading.setBounds(100, 20, 150, 20);
         add(heading);
-        if (regulars.isEmpty()) {
+        if (regulars.isEmpty() || (regulars == null)) {
             JTextField  noRegularsTxtFld;
 
             noRegularsTxtFld = new JTextField("No regulars to load.");
@@ -24,15 +25,18 @@ public class LoadRegularGuiView extends JFrame {
             add(noRegularsTxtFld);
         }
         else {
-            int index;
-            int yPos;
+            int     index;
+            int     yPos;
+            String  strId;
 
+            buttons = new ArrayList<>();
             yPos = 50;
             index = 0;
             while (index < regulars.size()) {
-                buttons = new ArrayList<>();
                 buttons.add(new JButton((regulars.get(index)).getName() + " - " + (regulars.get(index)).getClassType() + " level " + (regulars.get(index)).getLevel()));
                 buttons.get(index).setBounds(100, yPos, 300, 20);
+                strId = Integer.toString((regulars.get(index)).getId());
+                buttons.get(index).setActionCommand(strId);
                 add(buttons.get(index));
                 yPos += 25;
                 ++index;
@@ -42,6 +46,12 @@ public class LoadRegularGuiView extends JFrame {
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void addListenerAllBtns(ActionListener actionListener) {
+        for (JButton loadRegularBtn : buttons) {
+            loadRegularBtn.addActionListener(actionListener);
+        }
     }
 
 }
