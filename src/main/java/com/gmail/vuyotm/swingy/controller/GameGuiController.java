@@ -154,6 +154,7 @@ public class GameGuiController {
             else if (e.getSource() == moveRegularGuiView.getStatsAndArtifactsBtn()) {
                 moveRegularGuiView.dispose();
                 statsAndArtifacts(regular, map);
+                return ;
             }
             if (mapManager.hasCrossedMapBorder(regular)) {
                 map = new Map(regular);
