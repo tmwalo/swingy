@@ -39,22 +39,22 @@ public class FightManager {
         if (regular.getSpeed() >= shinheuh.getSpeed()) {
             regularManager.physicalAttack(shinheuh);
             fallInShinheuhHp = shinheuhOriginalHp - shinheuh.getHitPts();
-            attackRecord += regular.getName() + " launched a physical attack that reduced " + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
+            attackRecord += regular.getName() + " launched a physical attack that reduced " + System.lineSeparator() + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
             if (shinheuh.hasDied())
                 return ;
             shinheuhManager.physicalAttack(regular);
             fallInRegularHp = regularOriginalHp - regular.getHitPts();
-            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
+            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + System.lineSeparator() + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
         }
         else {
             shinheuhManager.physicalAttack(regular);
             fallInRegularHp = regularOriginalHp - regular.getHitPts();
-            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
+            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + System.lineSeparator() + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
             if (regular.hasDied())
                 return ;
             regularManager.physicalAttack(shinheuh);
             fallInShinheuhHp = shinheuhOriginalHp - shinheuh.getHitPts();
-            attackRecord += regular.getName() + " launched a physical attack that reduced " + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
+            attackRecord += regular.getName() + " launched a physical attack that reduced " + System.lineSeparator() + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
         }
     }
 
@@ -70,23 +70,34 @@ public class FightManager {
         if (regular.getSpeed() >= shinheuh.getSpeed()) {
             regularManager.shinsooAttack(shinheuh);
             fallInShinheuhHp = shinheuhOriginalHp - shinheuh.getHitPts();
-            attackRecord += regular.getName() + " launched a shinsoo attack that reduced " + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
+            attackRecord += regular.getName() + " launched a shinsoo attack that reduced " + System.lineSeparator() + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
             if (shinheuh.hasDied())
                 return ;
             shinheuhManager.physicalAttack(regular);
             fallInRegularHp = regularOriginalHp - regular.getHitPts();
-            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
+            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + System.lineSeparator() + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
         }
         else {
             shinheuhManager.physicalAttack(regular);
             fallInRegularHp = regularOriginalHp - regular.getHitPts();
-            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
+            attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + System.lineSeparator() + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
             if (regular.hasDied())
                 return ;
             regularManager.shinsooAttack(shinheuh);
             fallInShinheuhHp = shinheuhOriginalHp - shinheuh.getHitPts();
-            attackRecord += regular.getName() + " launched a shinsoo attack that reduced " + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
+            attackRecord += regular.getName() + " launched a shinsoo attack that reduced " + System.lineSeparator() + shinheuh.getType() + " health by " + fallInShinheuhHp + " points." + System.lineSeparator();
         }
+    }
+
+    public void endureWhenFailedToRun() {
+        int     regularOriginalHp;
+        int     fallInRegularHp;
+
+        attackRecord = "";
+        regularOriginalHp = regular.getHitPts();
+        shinheuhManager.physicalAttack(regular);
+        fallInRegularHp = regularOriginalHp - regular.getHitPts();
+        attackRecord += shinheuh.getType() + " launched a physical attack that reduced " + System.lineSeparator() + regular.getName() + " health by " + fallInRegularHp + " points. " + System.lineSeparator();
     }
 
 }
