@@ -116,23 +116,18 @@ public class GameController {
                 continue ;
             }
             else if (mapManager.hasEncounteredShinheuh(regular)) {
-                moveRegularView.displayEncounterOptions(bufferedReader);
-                if (moveRegularView.getEncounterOption().equals("2") && regularManager.run()) {
-                    regular.setX(originalX);
-                    regular.setY(originalY);
-                    moveRegularView.writeRunAwayMsg();
-                    continue ;
-                }
+                moveRegularView.writeEncounterMsg();
                 encounteredShinheuh = (Shinheuh) (map.getGrid())[regular.getY()][regular.getX()];
                 shinheuhManager = new ShinheuhManager(encounteredShinheuh);
-                fight(regular, regularManager, encounteredShinheuh, shinheuhManager, bufferedReader);
+                fight(regular, regularManager, encounteredShinheuh, shinheuhManager, map, originalX, originalY, bufferedReader);
+                continue ;
             }
             (map.getGrid())[originalY][originalX] = null;
             (map.getGrid())[regular.getY()][regular.getX()] = regular;
         }
     }
 
-    public void fight(Regular regular, RegularManager regularManager, Shinheuh shinheuh, ShinheuhManager shinheuhManager, BufferedReader bufferedReader) throws IOException {
+    public void fight(Regular regular, RegularManager regularManager, Shinheuh shinheuh, ShinheuhManager shinheuhManager, Map map, int originalX, int originalY, BufferedReader bufferedReader) throws IOException {
         FightView       fightView;
         FightManager    fightManager;
         boolean         fightEnded;
@@ -149,6 +144,19 @@ public class GameController {
             else if (fightView.getInputData().equals("2")) {
                 fightManager.launchShinsooAttack();
                 fightView.writeToScreen(fightManager.getAttackRecord());
+            }
+            else if (fightView.getInputData().equals("3")) {
+                if (regularManager.run()) {
+                    fightView.writeToScreen("You managed to run away." + System.lineSeparator());
+                    regular.setX(originalX);
+                    regular.setY(originalY);
+                    fightEnded = true;
+                    moveRegular(regular, map, bufferedReader);
+                }
+                else {
+                    fightManager.endureWhenFailedToRun();
+                    fightView.writeToScreen("You failed to run away. " + System.lineSeparator() + fightManager.getAttackRecord());
+                }
             }
             if (regular.hasDied()) {
                 fightView.writeRegularDeath();
@@ -174,13 +182,11 @@ public class GameController {
                             regular.setWeapon((Weapon) shinheuh.getItemDrop());
                     }
                 }
+                (map.getGrid())[originalY][originalX] = null;
+                (map.getGrid())[regular.getY()][regular.getX()] = regular;
                 fightEnded = true;
             }
         }
-    }
-
-    public void runGame(BufferedReader bufferedReader) throws IOException {
-        startGame(bufferedReader);
     }
 
 }

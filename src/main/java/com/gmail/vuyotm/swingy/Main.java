@@ -3,74 +3,48 @@ package com.gmail.vuyotm.swingy;
 import com.gmail.vuyotm.swingy.controller.GameController;
 import com.gmail.vuyotm.swingy.controller.GameGuiController;
 import com.gmail.vuyotm.swingy.storage.Database;
-import com.gmail.vuyotm.swingy.view.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) {
-/*
-        GameController  gameController;
 
-        Database.createDB();
-        gameController = new GameController();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            gameController.runGame(bufferedReader);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+        if (args.length != 1) {
+            System.out.println("One command line argument expected.");
+            System.exit(0);
         }
 
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:swingy.db");
-        }
-        catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+        if (!(args[0]).equals("console") && !(args[0]).equals("gui")) {
+            System.out.println("Command line argument console or gui expected.");
+            System.exit(0);
         }
 
-*/
+        if ((args[0]).equals("console")) {
 
-        Database.createDB();
-        GameGuiController   gameGuiController;
+            GameController  gameController;
 
-        gameGuiController = new GameGuiController();
-        gameGuiController.startGame();
+            Database.createDB();
+            gameController = new GameController();
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+                gameController.startGame(bufferedReader);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
 
-/*
+        }
+        else if ((args[0]).equals("gui")) {
 
-        StartGameGuiView    startGameGuiView;
+            GameGuiController   gameGuiController;
 
-        startGameGuiView = new StartGameGuiView();
+            Database.createDB();
+            gameGuiController = new GameGuiController();
+            gameGuiController.startGame();
 
-
-
-        CreateNewRegularGuiView     createNewRegularGuiView;
-
-        createNewRegularGuiView = new CreateNewRegularGuiView();
-
-
-        MoveRegularGuiView  moveRegularGuiView;
-
-        moveRegularGuiView = new MoveRegularGuiView();
-
-
-        FightGuiView    fightGuiView;
-
-        fightGuiView = new FightGuiView();
-
-
-        StatsAndArtifactsGuiView    statsAndArtifactsGuiView;
-
-        statsAndArtifactsGuiView = new StatsAndArtifactsGuiView();
-
-*/
+        }
 
     }
 

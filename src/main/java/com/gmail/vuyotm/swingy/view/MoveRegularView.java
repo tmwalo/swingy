@@ -12,22 +12,19 @@ import java.io.IOException;
 public class MoveRegularView extends BaseConsoleView {
 
     private String              moveOption;
-    private String              encounterOption;
     private boolean             hasExited = false;
     public static final String  DIRECTIONS = "Press 1 to go North." + System.lineSeparator()
                                             + "Press 2 to go South." + System.lineSeparator()
                                             + "Press 3 to go East." + System.lineSeparator()
                                             + "Press 4 to go West." + System.lineSeparator();
 
-    public static final String  ENCOUTER_SHINHEUH = "You have encountered a Shinheuh." + System.lineSeparator()
-                                                    + "Press 1 to fight." + System.lineSeparator()
-                                                    + "Press 2 to run away." + System.lineSeparator();
+    public static final String  ENCOUTER_SHINHEUH = "You have encountered a Shinheuh." + System.lineSeparator();
 
     public void writeMoveOptions() {
         writeToScreen(System.lineSeparator() + DIRECTIONS);
     }
 
-    public void writeEncounterOptions() {
+    public void writeEncounterMsg() {
         writeToScreen(System.lineSeparator() + ENCOUTER_SHINHEUH);
     }
 
@@ -61,25 +58,6 @@ public class MoveRegularView extends BaseConsoleView {
                 hasExited = true;
                 break ;
             }
-            else
-                writeToScreen(System.lineSeparator() + "Invalid input." + System.lineSeparator());
-        }
-    }
-
-    public void displayEncounterOptions(BufferedReader bufferedReader) throws IOException {
-        boolean selectEncounterOption;
-
-        selectEncounterOption = false;
-        while (!selectEncounterOption) {
-            writeEncounterOptions();
-            getUserInput(bufferedReader);
-            setEncounterOption(getInputData());
-            if (getEncounterOption().equals("1"))
-                selectEncounterOption = true;
-            else if (getEncounterOption().equals("2"))
-                selectEncounterOption = true;
-            else if (getEncounterOption().equals("q"))
-                System.exit(0);
             else
                 writeToScreen(System.lineSeparator() + "Invalid input." + System.lineSeparator());
         }

@@ -8,7 +8,8 @@ import java.io.IOException;
 public class FightView extends BaseConsoleView {
 
     public static final String FIGHT_OPTIONS = "Press 1 to launch a physical attack." + System.lineSeparator()
-                                                + "Press 2 to launch a shinsoo attack.";
+                                                + "Press 2 to launch a shinsoo attack." + System.lineSeparator()
+                                                + "Press 3 to run away." + System.lineSeparator();
 
     public static final String PICK_UP_ITEM_OPTIONS = "Press 1 to pick up artifact." + System.lineSeparator()
                                                         + "Press 2 to leave artifact.";
@@ -43,6 +44,8 @@ public class FightView extends BaseConsoleView {
             if (getInputData().equals("1"))
                 selectFightOption = true;
             else if (getInputData().equals("2"))
+                selectFightOption = true;
+            else if (getInputData().equals("3"))
                 selectFightOption = true;
             else
                 writeToScreen(System.lineSeparator() + "Invalid input." + System.lineSeparator());
