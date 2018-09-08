@@ -4,6 +4,7 @@ import com.gmail.vuyotm.swingy.controller.GameController;
 import com.gmail.vuyotm.swingy.controller.GameGuiController;
 import com.gmail.vuyotm.swingy.storage.Database;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -49,6 +50,9 @@ public class Main {
                 gameGuiController.startGame();
             }
             catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            catch (HeadlessException e) {
                 e.printStackTrace();
             }
 
