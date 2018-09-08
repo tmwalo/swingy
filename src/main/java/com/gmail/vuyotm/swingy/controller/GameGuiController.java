@@ -384,8 +384,4 @@ public class GameGuiController {
         statsAndArtifactsGuiView.addListenerBackBtn(statsAndArtifactsEventHandler);
     }
 
-    public void runGame() {
-        startGame();
-    }
-
 }
