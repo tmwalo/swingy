@@ -18,10 +18,10 @@ public class StatsAndArtifactsGuiView extends JFrame {
     private String      equipmentStr;
 
     public StatsAndArtifactsGuiView(Regular regular) throws HeadlessException {
-        statsAndEquipmentHeading = new JLabel("Stats and Equipment");
+        statsAndEquipmentHeading = new JLabel("Stats and Artifacts");
         statsHeading = new JLabel("Stats:");
         stats = new JTextArea();
-        equipmentHeading = new JLabel("Equipment:");
+        equipmentHeading = new JLabel("Artifacts:");
         equipment = new JTextArea();
         backBtn = new JButton("Back");
         stats.setEditable(false);
@@ -54,7 +54,7 @@ public class StatsAndArtifactsGuiView extends JFrame {
         statsStr += "Position: " + regular.getClassType() + System.lineSeparator();
         statsStr += "Hit Points: " + regular.getHitPts() + System.lineSeparator();
         statsStr += "Physical Attack: " + regular.getPhysicalAttack() + System.lineSeparator();
-        statsStr += "Shinsoo Attack: " + regular.getPhysicalAttack() + System.lineSeparator();
+        statsStr += "Shinsoo Attack: " + regular.getShinsooAttack() + System.lineSeparator();
         statsStr += "Physical Defense: " + regular.getPhysicalDefense() + System.lineSeparator();
         statsStr += "Shinsoo Defense: " + regular.getShinsooDefense() + System.lineSeparator();
         statsStr += "Speed: " + regular.getSpeed() + System.lineSeparator();
