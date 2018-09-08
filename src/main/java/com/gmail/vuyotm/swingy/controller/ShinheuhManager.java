@@ -3,10 +3,12 @@ package com.gmail.vuyotm.swingy.controller;
 import com.gmail.vuyotm.swingy.model.characters.Regular;
 import com.gmail.vuyotm.swingy.model.characters.Shinheuh;
 
+import javax.validation.constraints.NotNull;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ShinheuhManager {
 
+    @NotNull
     private Shinheuh    shinheuh;
 
     public ShinheuhManager(Shinheuh shinheuh) {
