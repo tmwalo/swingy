@@ -16,7 +16,7 @@ public class LoadRegularGuiView extends JFrame {
         heading = new JLabel("Load Regular");
         heading.setBounds(100, 20, 150, 20);
         add(heading);
-        if (regulars.isEmpty() || (regulars == null)) {
+        if ((regulars == null) || regulars.isEmpty()) {
             JTextField  noRegularsTxtFld;
 
             noRegularsTxtFld = new JTextField("No regulars to load.");
@@ -49,6 +49,8 @@ public class LoadRegularGuiView extends JFrame {
     }
 
     public void addListenerAllBtns(ActionListener actionListener) {
+        if (buttons == null)
+            return ;
         for (JButton loadRegularBtn : buttons) {
             loadRegularBtn.addActionListener(actionListener);
         }

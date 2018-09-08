@@ -25,7 +25,7 @@ public class LoadRegularView extends BaseConsoleView {
         regularNum = index + 1;
         selectedRegular = -1;
         writeToScreen("Select a Regular:" + System.lineSeparator() + System.lineSeparator());
-        if (regulars.isEmpty()) {
+        if ((regulars == null) || regulars.isEmpty()) {
             writeToScreen("There are no stored regulars." + System.lineSeparator());
             return ;
         }
