@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class GameGuiController {
 
+    private boolean isNewRegular;
+
     class StartGameEventHandler implements ActionListener {
 
         @NotNull
@@ -54,13 +56,11 @@ public class GameGuiController {
         public void actionPerformed(ActionEvent e) {
             String          regularName;
             String          regularPosition;
-            RegularContext  regularContext;
             Regular         regular;
             Map             map;
 
             regularName = createNewRegularGuiView.getRegularName();
             regularPosition = createNewRegularGuiView.getRegularPosition();
-            regularContext = new RegularContext(Database.CONNECTION_STRING);
             if (regularName.equals("")) {
                 createNewRegularGuiView.displayErrorMsg("Please enter your name.");
                 return ;
@@ -70,10 +70,8 @@ public class GameGuiController {
                 return ;
             }
             regular = RegularFactory.newRegular(regularName, regularPosition);
-            regularContext.openConnection();
-            regularContext.postRegular(regular);
-            regularContext.close();
             map = new Map(regular);
+            isNewRegular = true;
             createNewRegularGuiView.dispose();
             moveRegular(regular, map);
         }
@@ -102,6 +100,7 @@ public class GameGuiController {
             regular = regularContext.getRegular(regularId);
             regularContext.close();
             map = new Map(regular);
+            isNewRegular = false;
             loadRegularGuiView.dispose();
             moveRegular(regular, map);
         }
@@ -178,7 +177,10 @@ public class GameGuiController {
 
             regularContext = new RegularContext(Database.CONNECTION_STRING);
             regularContext.openConnection();
-            regularContext.putRegular(regular);
+            if (isNewRegular)
+                regularContext.postRegular(regular);
+            else
+                regularContext.putRegular(regular);
             regularContext.close();
             System.exit(0);
         }
