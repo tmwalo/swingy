@@ -3,10 +3,12 @@ package com.gmail.vuyotm.swingy.controller;
 import com.gmail.vuyotm.swingy.model.characters.Regular;
 import com.gmail.vuyotm.swingy.model.characters.Shinheuh;
 
+import javax.validation.constraints.NotNull;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RegularManager {
 
+    @NotNull
     private Regular regular;
 
     public RegularManager(Regular regular) {
@@ -89,7 +91,7 @@ public class RegularManager {
 
     public void levelUp() {
         while (hasLeveledUp()) {
-            regular.setLevel(regular.getLevel() + 2);
+            regular.setLevel(regular.getLevel() + 1);
             regular.setHitPts(regular.getHitPts() + 15);
             regular.setPhysicalAttack(regular.getPhysicalAttack() + 2);
             regular.setPhysicalDefense(regular.getPhysicalDefense() + 2);

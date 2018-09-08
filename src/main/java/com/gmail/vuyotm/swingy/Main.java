@@ -34,6 +34,9 @@ public class Main {
             catch (IOException e) {
                 e.printStackTrace();
             }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
 
         }
         else if ((args[0]).equals("gui")) {
@@ -42,7 +45,12 @@ public class Main {
 
             Database.createDB();
             gameGuiController = new GameGuiController();
-            gameGuiController.startGame();
+            try {
+                gameGuiController.startGame();
+            }
+            catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
 
         }
 
